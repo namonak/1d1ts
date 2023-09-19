@@ -6,11 +6,8 @@ if (process.env.NODE_ENV !== 'test') {
     output: process.stdout,
   });
 
-  let input: number[] = [];
-
   rl.on('line', function (line: string) {
-    input = line.split(' ').map((el: string) => parseInt(el));
-  }).on('close', function () {
+    const input = line.split(' ').map((el: string) => parseInt(el));
     console.log(solution(input[0], input[1]));
     process.exit();
   });
