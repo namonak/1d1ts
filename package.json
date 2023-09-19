@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ts": "npm run clean && tsc --outDir ./dist/$(dirname $npm_config_file) $npm_config_file && node ./dist/${npm_config_file%.ts}.js",
+    "ts": "npm run clean && npx tsc --outDir ./dist/$(dirname $npm_config_file) $npm_config_file && node ./dist/${npm_config_file%.ts}.js",
     "clean": "rm -rf ./dist",
+    "build:main": "npx tsc --outDir ./dist ./src/main/**/*.ts",
     "test": "jest",
     "format": "prettier --check ./src",
     "format:fix": "prettier --write ./src",
