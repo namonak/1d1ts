@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "ts": "npm run clean && tsc --outDir ./dist/$(dirname $npm_config_file) $npm_config_file && node ./dist/${npm_config_file%.ts}.js",
+    "clean": "rm -rf ./dist",
     "test": "jest",
     "format": "prettier --check ./src",
     "format:fix": "prettier --write ./src",
     "lint": "eslint ./src",
-    "lint:fix": "eslint --fix ./src"
+    "lint:fix": "eslint --fix ./src",
+    "precommit": "npm run format:fix && npm run lint:fix && npm run format && npm run lint"
   },
   "jest": {
     "preset": "ts-jest",
