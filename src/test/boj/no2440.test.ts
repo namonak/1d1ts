@@ -9,10 +9,10 @@ test('별 찍기 - 3 : https://www.acmicpc.net/problem/2440', () => {
   ***
   **
   *`
-  .split('\n')
-  .map(line => line.trim())
-  .join('\n')
-  .trim();
+    .split('\n')
+    .map((line) => line.trim())
+    .join('\n')
+    .trim();
 
   expect(solution(given)).toBe(expected);
 });
