@@ -1,6 +1,7 @@
 # 1d1ts
 
 [![CI](https://github.com/namonak/1d1ts/actions/workflows/ci.yml/badge.svg)](https://github.com/namonak/1d1ts/actions/workflows/ci.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=namonak_1d1ts&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=namonak_1d1ts)
 
 ----
 
