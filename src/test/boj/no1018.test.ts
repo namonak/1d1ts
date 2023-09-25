@@ -6,12 +6,12 @@ type given = {
   board: string[];
 };
 
-type testCases = {
+type testCase = {
   input: given;
   output: number;
 };
 
-const testCases: testCases[] = [
+const testCases: testCase[] = [
   {
     input: {
       x: 8,
