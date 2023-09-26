@@ -36,8 +36,14 @@ export function solution(testCount: number, numbers: number[]): number[] {
   return result;
 }
 
+const memo: number[][] = Array.from({ length: 15 }, () => Array(15).fill(-1));
+
 function getPeopleCount(k: number, n: number): number {
   if (k == 0) return n;
   if (n == 1) return 1;
-  return getPeopleCount(k - 1, n) + getPeopleCount(k, n - 1);
+
+  if (memo[k][n] !== -1) return memo[k][n];
+
+  memo[k][n] = getPeopleCount(k - 1, n) + getPeopleCount(k, n - 1);
+  return memo[k][n];
 }
