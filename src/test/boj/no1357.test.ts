@@ -13,36 +13,36 @@ type testCase = {
 const testCases: testCase[] = [
   {
     input: {
-      x: "123",
-      y: "100",
+      x: '123',
+      y: '100',
     },
     output: 223,
   },
   {
     input: {
-      x: "111",
-      y: "111",
+      x: '111',
+      y: '111',
     },
     output: 222,
   },
   {
     input: {
-      x: "5",
-      y: "5",
+      x: '5',
+      y: '5',
     },
     output: 1,
   },
   {
     input: {
-      x: "1000",
-      y: "1",
+      x: '1000',
+      y: '1',
     },
     output: 2,
   },
   {
     input: {
-      x: "456",
-      y: "789",
+      x: '456',
+      y: '789',
     },
     output: 1461,
   },

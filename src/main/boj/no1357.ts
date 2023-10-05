@@ -5,9 +5,9 @@ if (process.env.NODE_ENV !== 'test') {
     input: process.stdin,
     output: process.stdout,
   });
-  
+
   rl.on('line', function (line: string) {
-    const input = line.split(' ')
+    const input = line.split(' ');
     console.log(solution(input[0], input[1]));
     process.exit();
   });
