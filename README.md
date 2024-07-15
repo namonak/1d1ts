@@ -33,7 +33,7 @@ $ npm run test
 ## Run on Node.js
 
 ```bash
-$ npm run ts --file=./src/main/boj/no1000.ts
+$ npm run ts --file=./src/main/boj/main.ts
 ```
 
 ## Format on Prettier
