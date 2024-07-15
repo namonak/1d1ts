@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "ts": "npm run clean && npx tsc --outDir ./dist/$(dirname $npm_config_file) $npm_config_file && node ./dist/${npm_config_file%.ts}.js",
+    "main": "npm run clean && npm run ts --file=./src/main/boj/main.ts",
     "clean": "rm -rf ./dist",
     "build:main": "npx tsc --outDir ./dist ./src/main/**/*.ts",
     "test": "jest",
