@@ -1,5 +1,5 @@
 import * as readline from 'readline';
-import { solution } from '../../main/boj/no1000';
+import { solution } from '../../main/boj/no1001';
 
 if (process.env.NODE_ENV !== 'test') {
   const rl = readline.createInterface({
