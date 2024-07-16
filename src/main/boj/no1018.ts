@@ -1,35 +1,40 @@
-import * as readLine from 'readline';
+import * as readline from 'readline';
+import { Readable } from 'stream';
 
 type Board = {
   n: number;
   m: number;
 };
 
-if (process.env.NODE_ENV !== 'test') {
-  const rl = readLine.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+export class No1018 {
+  async solve(input: Readable): Promise<string> {
+    const rl = readline.createInterface({
+      input,
+      output: process.stdout,
+    });
 
-  let inputCount: number | null = null;
-  let board: Board;
-  const inputs: string[] = [];
+    let inputCount: number | null = null;
+    let board: Board;
+    const inputs: string[] = [];
 
-  rl.on('line', function (line: string) {
-    if (!inputCount) {
-      const [n, m] = line.split(' ').map((el: string) => parseInt(el, 10));
-      board = { n, m };
-      inputCount = board.n;
-      return;
-    }
+    return new Promise((resolve) => {
+      rl.on('line', function (line: string) {
+        if (!inputCount) {
+          const [n, m] = line.split(' ').map((el: string) => parseInt(el, 10));
+          board = { n, m };
+          inputCount = board.n;
+          return;
+        }
 
-    inputs.push(line);
+        inputs.push(line);
 
-    if (inputs.length === inputCount) {
-      console.log(solution(board.n, board.m, inputs));
-      process.exit();
-    }
-  });
+        if (inputs.length === inputCount) {
+          resolve(solution(board.n, board.m, inputs).toString());
+          rl.close();
+        }
+      });
+    });
+  }
 }
 
 export function solution(n: number, m: number, board: string[]): number {

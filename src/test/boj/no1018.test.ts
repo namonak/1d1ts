@@ -1,148 +1,109 @@
-import { solution } from '../../main/boj/no1018';
+import { No1018 } from '../../main/boj/no1018';
+import { Readable } from 'stream';
 
-type given = {
-  x: number;
-  y: number;
-  board: string[];
+type TestCase = {
+  given: string;
+  expected: string;
 };
 
-type testCase = {
-  input: given;
-  output: number;
-};
-
-const testCases: testCase[] = [
+const testCases: TestCase[] = [
   {
-    input: {
-      x: 8,
-      y: 8,
-      board: [
-        'WBWBWBWB',
-        'BWBWBWBW',
-        'WBWBWBWB',
-        'BWBBBWBW',
-        'WBWBWBWB',
-        'BWBWBWBW',
-        'WBWBWBWB',
-        'BWBWBWBW',
-      ],
-    },
-    output: 1,
+    given: `8 8
+WBWBWBWB
+BWBWBWBW
+WBWBWBWB
+BWBBBWBW
+WBWBWBWB
+BWBWBWBW
+WBWBWBWB
+BWBWBWBW`,
+    expected: '1',
   },
   {
-    input: {
-      x: 10,
-      y: 13,
-      board: [
-        'BBBBBBBBWBWBW',
-        'BBBBBBBBBWBWB',
-        'BBBBBBBBWBWBW',
-        'BBBBBBBBBWBWB',
-        'BBBBBBBBWBWBW',
-        'BBBBBBBBBWBWB',
-        'BBBBBBBBWBWBW',
-        'BBBBBBBBBWBWB',
-        'WWWWWWWWWWBWB',
-        'WWWWWWWWWWBWB',
-      ],
-    },
-    output: 12,
+    given: `10 13
+BBBBBBBBWBWBW
+BBBBBBBBBWBWB
+BBBBBBBBWBWBW
+BBBBBBBBBWBWB
+BBBBBBBBWBWBW
+BBBBBBBBBWBWB
+BBBBBBBBWBWBW
+BBBBBBBBBWBWB
+WWWWWWWWWWBWB
+WWWWWWWWWWBWB`,
+    expected: '12',
   },
   {
-    input: {
-      x: 8,
-      y: 8,
-      board: [
-        'BWBWBWBW',
-        'WBWBWBWB',
-        'BWBWBWBW',
-        'WBWBWBWB',
-        'BWBWBWBW',
-        'WBWBWBWB',
-        'BWBWBWBW',
-        'WBWBWBWB',
-      ],
-    },
-    output: 0,
+    given: `8 8
+BWBWBWBW
+WBWBWBWB
+BWBWBWBW
+WBWBWBWB
+BWBWBWBW
+WBWBWBWB
+BWBWBWBW
+WBWBWBWB`,
+    expected: '0',
   },
   {
-    input: {
-      x: 9,
-      y: 23,
-      board: [
-        'BBBBBBBBBBBBBBBBBBBBBBB',
-        'BBBBBBBBBBBBBBBBBBBBBBB',
-        'BBBBBBBBBBBBBBBBBBBBBBB',
-        'BBBBBBBBBBBBBBBBBBBBBBB',
-        'BBBBBBBBBBBBBBBBBBBBBBB',
-        'BBBBBBBBBBBBBBBBBBBBBBB',
-        'BBBBBBBBBBBBBBBBBBBBBBB',
-        'BBBBBBBBBBBBBBBBBBBBBBB',
-        'BBBBBBBBBBBBBBBBBBBBBBW',
-      ],
-    },
-    output: 31,
+    given: `9 23
+BBBBBBBBBBBBBBBBBBBBBBB
+BBBBBBBBBBBBBBBBBBBBBBB
+BBBBBBBBBBBBBBBBBBBBBBB
+BBBBBBBBBBBBBBBBBBBBBBB
+BBBBBBBBBBBBBBBBBBBBBBB
+BBBBBBBBBBBBBBBBBBBBBBB
+BBBBBBBBBBBBBBBBBBBBBBB
+BBBBBBBBBBBBBBBBBBBBBBB
+BBBBBBBBBBBBBBBBBBBBBBW`,
+    expected: '31',
   },
   {
-    input: {
-      x: 10,
-      y: 10,
-      board: [
-        'BBBBBBBBBB',
-        'BBWBWBWBWB',
-        'BWBWBWBWBB',
-        'BBWBWBWBWB',
-        'BWBWBWBWBB',
-        'BBWBWBWBWB',
-        'BWBWBWBWBB',
-        'BBWBWBWBWB',
-        'BWBWBWBWBB',
-        'BBBBBBBBBB',
-      ],
-    },
-    output: 0,
+    given: `10 10
+BBBBBBBBBB
+BBWBWBWBWB
+BWBWBWBWBB
+BBWBWBWBWB
+BWBWBWBWBB
+BBWBWBWBWB
+BWBWBWBWBB
+BBWBWBWBWB
+BWBWBWBWBB
+BBBBBBBBBB`,
+    expected: '0',
   },
   {
-    input: {
-      x: 8,
-      y: 8,
-      board: [
-        'WBWBWBWB',
-        'BWBWBWBW',
-        'WBWBWBWB',
-        'BWBBBWBW',
-        'WBWBWBWB',
-        'BWBWBWBW',
-        'WBWBWWWB',
-        'BWBWBWBW',
-      ],
-    },
-    output: 2,
+    given: `8 8
+WBWBWBWB
+BWBWBWBW
+WBWBWBWB
+BWBBBWBW
+WBWBWBWB
+BWBWBWBW
+WBWBWWWB
+BWBWBWBW`,
+    expected: '2',
   },
   {
-    input: {
-      x: 11,
-      y: 12,
-      board: [
-        'BWWBWWBWWBWW',
-        'BWWBWBBWWBWW',
-        'WBWWBWBBWWBW',
-        'BWWBWBBWWBWW',
-        'WBWWBWBBWWBW',
-        'BWWBWBBWWBWW',
-        'WBWWBWBBWWBW',
-        'BWWBWBWWWBWW',
-        'WBWWBWBBWWBW',
-        'BWWBWBBWWBWW',
-        'WBWWBWBBWWBW',
-      ],
-    },
-    output: 15,
+    given: `11 12
+BWWBWWBWWBWW
+BWWBWBBWWBWW
+WBWWBWBBWWBW
+BWWBWBBWWBWW
+WBWWBWBBWWBW
+BWWBWBBWWBWW
+WBWWBWBBWWBW
+BWWBWBWWWBWW
+WBWWBWBBWWBW
+BWWBWBBWWBWW
+WBWWBWBBWWBW`,
+    expected: '15',
   },
 ];
 
-test('체스판 다시 칠하기 : https://www.acmicpc.net/problem/1018', () => {
-  testCases.forEach(({ input, output }) => {
-    expect(solution(input.x, input.y, input.board)).toBe(output);
+test('체스판 다시 칠하기 : https://www.acmicpc.net/problem/1018', async () => {
+  testCases.forEach(async ({ given, expected }) => {
+    const result = await new No1018().solve(Readable.from(given));
+    expect(result).toBe(expected);
   });
 });
