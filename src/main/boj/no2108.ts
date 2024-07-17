@@ -1,33 +1,32 @@
-import * as readLine from 'readline';
+import * as readline from 'readline';
+import { Readable } from 'stream';
 
-if (process.env.NODE_ENV !== 'test') {
-  const rl = readLine.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+export class No2108 {
+  async solve(input: Readable): Promise<string> {
+    const rl = readline.createInterface({
+      input,
+      output: process.stdout,
+    });
 
-  let inputCount: number | null = null;
-  const inputs: number[] = [];
-
-  rl.on('line', function (line: string) {
-    if (!inputCount) {
-      inputCount = parseInt(line, 10);
-      return;
-    }
-
-    inputs.push(parseInt(line, 10));
-
-    if (inputs.length === inputCount) {
-      const result = solution(inputs);
-      result.forEach((num) => {
-        console.log(num);
+    return new Promise((resolve) => {
+      let n = 0;
+      const numbers: string[] = [];
+      rl.on('line', function (line: string) {
+        if (n === 0) {
+          n = parseInt(line, 10);
+        } else {
+          numbers.push(line);
+        }
+        if (numbers.length === n) {
+          const result = solution(numbers.map((num) => parseInt(num, 10)));
+          resolve(result.join('\n'));
+        }
       });
-      process.exit();
-    }
-  });
+    });
+  }
 }
 
-export function solution(numbers: number[]): number[] {
+function solution(numbers: number[]): number[] {
   const sortedNumbers = numbers.sort((a, b) => a - b);
   const sum = sortedNumbers.reduce((acc, val) => acc + val, 0);
   const average = Math.round(sum / numbers.length);
