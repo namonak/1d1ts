@@ -1,15 +1,20 @@
-import * as readLine from 'readline';
+import * as readline from 'readline';
+import { Readable } from 'stream';
 
-if (process.env.NODE_ENV !== 'test') {
-  const rl = readLine.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+export class No1676 {
+  async solve(input: Readable): Promise<string> {
+    const rl = readline.createInterface({
+      input,
+      output: process.stdout,
+    });
 
-  rl.on('line', function (line: string) {
-    console.log(solution(parseInt(line, 10)));
-    process.exit();
-  });
+    return new Promise((resolve) => {
+      rl.on('line', function (line: string) {
+        resolve(solution(parseInt(line, 10)).toString());
+        rl.close();
+      });
+    });
+  }
 }
 
 export function solution(input: number): number {
