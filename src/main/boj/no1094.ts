@@ -1,9 +1,9 @@
-import * as readLine from 'readline';
+import * as readline from 'readline';
 import { Readable } from 'stream';
 
 export class No1094 {
   async solve(input: Readable): Promise<string> {
-    const rl = readLine.createInterface({
+    const rl = readline.createInterface({
       input,
       output: process.stdout,
     });
