@@ -1,23 +1,19 @@
-import { solution } from '../../main/boj/no2748';
+import { No2748 } from '../../main/boj/no2748';
+import { Readable } from 'stream';
 
-type testCase = {
-  input: number;
-  output: bigint;
+type TestCase = {
+  given: string;
+  expected: string;
 };
 
-const testCases: testCase[] = [
-  {
-    input: 10,
-    output: BigInt('55'),
-  },
-  {
-    input: 90,
-    output: BigInt('2880067194370816120'),
-  },
+const testCases: TestCase[] = [
+  { given: '10', expected: '55' },
+  { given: '90', expected: '2880067194370816120' },
 ];
 
-test('피보나치 수 2 : https://www.acmicpc.net/problem/2748', () => {
-  testCases.forEach(({ input, output }) => {
-    expect(solution(input)).toBe(output);
-  });
+test('피보나치 수 2 : https://www.acmicpc.net/problem/2748', async () => {
+  for (const { given, expected } of testCases) {
+    const result = await new No2748().solve(Readable.from(given));
+    expect(result).toBe(expected);
+  }
 });

@@ -1,33 +1,42 @@
 import * as readline from 'readline';
+import { Readable } from 'stream';
 
-if (process.env.NODE_ENV !== 'test') {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+export class No2748 {
+  private static MAX: number = 90;
+  private memo: bigint[];
 
-  rl.on('line', function (line: string) {
-    console.log(solution(parseInt(line, 10)).toString());
-    process.exit();
-  });
-}
-
-const MAX: number = 90;
-const memo = new Array(MAX + 1).fill(BigInt(-1));
-
-export function solution(n: number): bigint {
-  memo[0] = BigInt(0);
-  memo[1] = BigInt(1);
-
-  return fibo(n);
-}
-
-function fibo(n: number): bigint {
-  if (memo[n] !== BigInt(-1)) {
-    return memo[n];
+  constructor() {
+    this.memo = new Array(No2748.MAX + 1).fill(BigInt(-1));
+    this.memo[0] = BigInt(0);
+    this.memo[1] = BigInt(1);
   }
 
-  memo[n] = fibo(n - 1) + fibo(n - 2);
+  async solve(input: Readable): Promise<string> {
+    const rl = readline.createInterface({
+      input,
+      output: process.stdout,
+    });
 
-  return memo[n];
+    return new Promise((resolve) => {
+      rl.on('line', (line: string) => {
+        const n = parseInt(line, 10);
+        resolve(this.solution(n).toString());
+        rl.close();
+      });
+    });
+  }
+
+  private solution(n: number): bigint {
+    return this.fibo(n);
+  }
+
+  private fibo(n: number): bigint {
+    if (this.memo[n] !== BigInt(-1)) {
+      return this.memo[n];
+    }
+
+    this.memo[n] = this.fibo(n - 1) + this.fibo(n - 2);
+
+    return this.memo[n];
+  }
 }
