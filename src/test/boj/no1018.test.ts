@@ -102,8 +102,8 @@ WBWWBWBBWWBW`,
 ];
 
 test('체스판 다시 칠하기 : https://www.acmicpc.net/problem/1018', async () => {
-  testCases.forEach(async ({ given, expected }) => {
+  for (const { given, expected } of testCases) {
     const result = await new No1018().solve(Readable.from(given));
     expect(result).toBe(expected);
-  });
+  }
 });
