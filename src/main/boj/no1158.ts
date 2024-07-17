@@ -1,16 +1,20 @@
 import * as readline from 'readline';
+import { Readable } from 'stream';
 
-if (process.env.NODE_ENV !== 'test') {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+export class No1158 {
+  async solve(input: Readable): Promise<string> {
+    const rl = readline.createInterface({
+      input,
+      output: process.stdout,
+    });
 
-  rl.on('line', function (line: string) {
-    const input = line.split(' ').map((el: string) => parseInt(el));
-    console.log(`<${solution(input[0], input[1]).join(', ')}>`);
-    process.exit();
-  });
+    return new Promise((resolve) => {
+      rl.on('line', function (line: string) {
+        const [n, k] = line.split(' ').map((el: string) => parseInt(el, 10));
+        resolve(`<${solution(n, k).join(', ')}>`);
+      });
+    });
+  }
 }
 
 export function solution(n: number, k: number): number[] {
