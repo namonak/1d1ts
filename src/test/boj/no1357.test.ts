@@ -29,9 +29,9 @@ const testCases: TestCase[] = [
   },
 ];
 
-test('뒤집힌 덧셈 : https://www.acmicpc.net/problem/1357', () => {
-  testCases.forEach(async ({ given, expected }) => {
+test('뒤집힌 덧셈 : https://www.acmicpc.net/problem/1357', async () => {
+  for (const { given, expected } of testCases) {
     const result = await new No1357().solve(Readable.from(given));
     expect(result).toBe(expected);
-  });
+  }
 });
