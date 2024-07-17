@@ -13,9 +13,9 @@ const testCases: TestCase[] = [
   { given: '48', expected: '2' },
 ];
 
-test('막대기 : https://www.acmicpc.net/problem/1094', () => {
-  testCases.forEach(async ({ given, expected }) => {
+test('막대기 : https://www.acmicpc.net/problem/1094', async () => {
+  for (const { given, expected } of testCases) {
     const result = await new No1094().solve(Readable.from(given));
     expect(result).toBe(expected);
-  });
+  }
 });
