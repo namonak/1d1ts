@@ -21,9 +21,9 @@ const testCases: TestCase[] = [
   },
 ];
 
-test('요세푸스 문제 : https://www.acmicpc.net/problem/1158', () => {
-  testCases.forEach(async ({ given, expected }) => {
+test('요세푸스 문제 : https://www.acmicpc.net/problem/1158', async () => {
+  for (const { given, expected } of testCases) {
     const result = await new No1158().solve(Readable.from(given));
     expect(result).toBe(expected);
-  });
+  }
 });
