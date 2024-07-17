@@ -1,19 +1,23 @@
 import * as readLine from 'readline';
+import { Readable } from 'stream';
 
-if (process.env.NODE_ENV !== 'test') {
-  const rl = readLine.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+export class No1357 {
+  async solve(input: Readable): Promise<string> {
+    const rl = readLine.createInterface({
+      input,
+      output: process.stdout,
+    });
 
-  rl.on('line', function (line: string) {
-    const input = line.split(' ');
-    console.log(solution(input[0], input[1]));
-    process.exit();
-  });
+    return new Promise((resolve) => {
+      rl.on('line', function (line: string) {
+        const [x, y] = line.split(' ');
+        resolve(solution(x, y).toString());
+      });
+    });
+  }
 }
 
-export function solution(x: string, y: string): number {
+function solution(x: string, y: string): number {
   return reverseNumber((reverseNumber(x) + reverseNumber(y)).toString());
 }
 

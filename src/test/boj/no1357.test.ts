@@ -1,55 +1,37 @@
-import { solution } from '../../main/boj/no1357';
+import { No1357 } from '../../main/boj/no1357';
+import { Readable } from 'stream';
 
-type given = {
-  x: string;
-  y: string;
+type TestCase = {
+  given: string;
+  expected: string;
 };
 
-type testCase = {
-  input: given;
-  output: number;
-};
-
-const testCases: testCase[] = [
+const testCases: TestCase[] = [
   {
-    input: {
-      x: '123',
-      y: '100',
-    },
-    output: 223,
+    given: '123 100',
+    expected: '223',
   },
   {
-    input: {
-      x: '111',
-      y: '111',
-    },
-    output: 222,
+    given: '111 111',
+    expected: '222',
   },
   {
-    input: {
-      x: '5',
-      y: '5',
-    },
-    output: 1,
+    given: '5 5',
+    expected: '1',
   },
   {
-    input: {
-      x: '1000',
-      y: '1',
-    },
-    output: 2,
+    given: '1000 1',
+    expected: '2',
   },
   {
-    input: {
-      x: '456',
-      y: '789',
-    },
-    output: 1461,
+    given: '456 789',
+    expected: '1461',
   },
 ];
 
 test('뒤집힌 덧셈 : https://www.acmicpc.net/problem/1357', () => {
-  testCases.forEach(({ input, output }) => {
-    expect(solution(input.x, input.y)).toBe(output);
+  testCases.forEach(async ({ given, expected }) => {
+    const result = await new No1357().solve(Readable.from(given));
+    expect(result).toBe(expected);
   });
 });
