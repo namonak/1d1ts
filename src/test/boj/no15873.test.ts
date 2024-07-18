@@ -9,6 +9,11 @@ type TestCase = {
 const testCases: TestCase[] = [
   { given: '37', expected: '10' },
   { given: '102', expected: '12' },
+  { given: '10', expected: '1' },
+  { given: '100', expected: '11' },
+  { given: '110', expected: '11' },
+  { given: '50', expected: '5' },
+  { given: '99', expected: '18' },
 ];
 
 test('공백 없는 A+B : https://www.acmicpc.net/problem/15873', async () => {
