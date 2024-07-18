@@ -1,27 +1,15 @@
-import { solution } from '../../main/boj/no2775';
+import { No2775 } from '../../main/boj/no2775';
+import { Readable } from 'stream';
 
-type given = {
-  testCount: number;
-  numbers: number[];
-};
+test('부녀회장이 될테야 : https://www.acmicpc.net/problem/2775', async () => {
+  const given = `2
+1
+3
+2
+3`;
+  const expected = `6
+10`;
 
-type testCase = {
-  input: given;
-  output: number[];
-};
-
-const testCases: testCase[] = [
-  {
-    input: {
-      testCount: 2,
-      numbers: [1, 3, 2, 3],
-    },
-    output: [6, 10],
-  },
-];
-
-test('부녀회장이 될테야 : https://www.acmicpc.net/problem/2775', () => {
-  testCases.forEach(({ input, output }) => {
-    expect(solution(input.testCount, input.numbers)).toEqual(output);
-  });
+  const result = await new No2775().solve(Readable.from(given));
+  expect(result).toBe(expected);
 });
