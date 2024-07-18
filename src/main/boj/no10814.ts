@@ -1,33 +1,38 @@
-import * as readLine from 'readline';
+import * as readline from 'readline';
+import { Readable } from 'stream';
 
-if (process.env.NODE_ENV !== 'test') {
-  const rl = readLine.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+export class No10814 {
+  async solve(input: Readable): Promise<string> {
+    return new Promise((resolve) => {
+      const rl = readline.createInterface({
+        input,
+        output: process.stdout,
+      });
 
-  let inputCount: number | null = null;
-  const inputs: string[] = [];
+      let inputCount: number | null = null;
+      const inputs: string[] = [];
 
-  rl.on('line', function (line: string) {
-    if (!inputCount) {
-      inputCount = parseInt(line, 10);
-      return;
-    }
+      rl.on('line', (line: string) => {
+        if (inputCount === null) {
+          inputCount = parseInt(line, 10);
+          return;
+        }
 
-    inputs.push(line);
+        inputs.push(line);
 
-    if (inputs.length === inputCount) {
-      console.log(solution(inputs));
-      process.exit();
-    }
-  });
+        if (inputs.length === inputCount) {
+          resolve(solution(inputs));
+          rl.close();
+        }
+      });
+    });
+  }
 }
 
-interface Person {
+type Person = {
   age: number;
   name: string;
-}
+};
 
 export function solution(input: string[]): string {
   const people: Person[] = input.map((line) => {
