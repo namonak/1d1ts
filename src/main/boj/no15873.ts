@@ -1,18 +1,23 @@
-import * as readLine from 'readline';
+import * as readline from 'readline';
+import { Readable } from 'stream';
 
-if (process.env.NODE_ENV !== 'test') {
-  const rl = readLine.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+export class No15873 {
+  async solve(input: Readable): Promise<string> {
+    return new Promise((resolve) => {
+      const rl = readline.createInterface({
+        input,
+        output: process.stdout,
+      });
 
-  rl.on('line', function (line: string) {
-    console.log(solution(parseInt(line, 10)));
-    process.exit();
-  });
+      rl.on('line', (line: string) => {
+        resolve(solution(parseInt(line, 10)).toString());
+        rl.close();
+      });
+    });
+  }
 }
 
-export function solution(n: number): number {
+function solution(n: number): number {
   let result = 0;
 
   if (n < 100) {
