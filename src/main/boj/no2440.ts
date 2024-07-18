@@ -3,12 +3,12 @@ import { Readable } from 'stream';
 
 export class No2440 {
   async solve(input: Readable): Promise<string> {
-    const rl = readline.createInterface({
-      input,
-      output: process.stdout,
-    });
-
     return new Promise((resolve) => {
+      const rl = readline.createInterface({
+        input,
+        output: process.stdout,
+      });
+
       rl.on('line', (line: string) => {
         resolve(solution(parseInt(line, 10)));
         rl.close();

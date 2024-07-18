@@ -3,21 +3,23 @@ import { Readable } from 'stream';
 
 export class No5363 {
   async solve(input: Readable): Promise<string> {
-    const rl = readline.createInterface({
-      input,
-      output: process.stdout,
-    });
-
     return new Promise((resolve) => {
-      let n = 0;
+      const rl = readline.createInterface({
+        input,
+        output: process.stdout,
+      });
+
+      let inputCount: number | null = null;
       const lines: string[] = [];
       rl.on('line', function (line: string) {
-        if (n === 0) {
-          n = parseInt(line, 10);
-        } else {
-          lines.push(line);
+        if (inputCount === null) {
+          inputCount = parseInt(line, 10);
+          return;
         }
-        if (lines.length === n) {
+
+        lines.push(line);
+
+        if (lines.length === inputCount) {
           resolve(
             lines
               .map((line) => {

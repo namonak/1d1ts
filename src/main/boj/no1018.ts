@@ -8,18 +8,18 @@ type Board = {
 
 export class No1018 {
   async solve(input: Readable): Promise<string> {
-    const rl = readline.createInterface({
-      input,
-      output: process.stdout,
-    });
-
     return new Promise((resolve) => {
-      let inputCount: number = 0;
+      const rl = readline.createInterface({
+        input,
+        output: process.stdout,
+      });
+
+      let inputCount: number | null = null;
       let board: Board;
       const inputs: string[] = [];
 
       rl.on('line', (line: string) => {
-        if (inputCount === 0) {
+        if (inputCount === null) {
           const [n, m] = line.split(' ').map((el: string) => parseInt(el, 10));
           board = { n, m };
           inputCount = board.n;
