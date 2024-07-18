@@ -12,12 +12,14 @@ export class No15351 {
     const inputs: string[] = [];
 
     return new Promise((resolve) => {
-      rl.on('line', function (line: string) {
-        if (!inputCount) {
+      rl.on('line', (line: string) => {
+        if (inputCount === null) {
           inputCount = parseInt(line, 10);
           return;
         }
+
         inputs.push(line);
+
         if (inputs.length === inputCount) {
           resolve(solution(inputs).toString());
           rl.close();
