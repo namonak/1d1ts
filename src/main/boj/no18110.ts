@@ -1,31 +1,36 @@
-import * as readLine from 'readline';
+import * as readline from 'readline';
+import { Readable } from 'stream';
 
-if (process.env.NODE_ENV !== 'test') {
-  const rl = readLine.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+export class No18110 {
+  async solve(input: Readable): Promise<string> {
+    return new Promise((resolve) => {
+      const rl = readline.createInterface({
+        input,
+        output: process.stdout,
+      });
 
-  let inputCount: number | null = null;
-  const inputs: string[] = [];
+      let inputCount: number | null = null;
+      const numbers: number[] = [];
 
-  rl.on('line', function (line: string) {
-    if (!inputCount) {
-      inputCount = parseInt(line, 10);
-      if (inputCount === 0) {
-        console.log(0);
-        process.exit();
-      }
-      return;
-    }
+      rl.on('line', (line: string) => {
+        if (inputCount === null) {
+          inputCount = parseInt(line, 10);
+          if (inputCount === 0) {
+            resolve('0');
+            rl.close();
+          }
+          return;
+        }
 
-    inputs.push(line);
+        numbers.push(parseInt(line, 10));
 
-    if (inputs.length === inputCount) {
-      console.log(solution(inputs.map((input) => parseInt(input, 10))));
-      process.exit();
-    }
-  });
+        if (numbers.length === inputCount) {
+          resolve(solution(numbers).toString());
+          rl.close();
+        }
+      });
+    });
+  }
 }
 
 function averageOfArray(arr: number[]): number {
@@ -33,7 +38,7 @@ function averageOfArray(arr: number[]): number {
   return sum / arr.length;
 }
 
-export function solution(numbers: number[]): number {
+function solution(numbers: number[]): number {
   const removeCount = Math.round(numbers.length * 0.15);
   const removeNumbers = numbers
     .sort((a, b) => a - b)
