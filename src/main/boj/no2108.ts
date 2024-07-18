@@ -9,17 +9,19 @@ export class No2108 {
     });
 
     return new Promise((resolve) => {
-      let n = 0;
+      let inputCount: number = 0;
       const numbers: string[] = [];
-      rl.on('line', function (line: string) {
-        if (n === 0) {
-          n = parseInt(line, 10);
+
+      rl.on('line', (line: string) => {
+        if (inputCount === 0) {
+          inputCount = parseInt(line, 10);
         } else {
           numbers.push(line);
         }
-        if (numbers.length === n) {
+        if (numbers.length === inputCount) {
           const result = solution(numbers.map((num) => parseInt(num, 10)));
           resolve(result.join('\n'));
+          rl.close();
         }
       });
     });

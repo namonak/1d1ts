@@ -9,7 +9,7 @@ export class No1094 {
     });
 
     return new Promise((resolve) => {
-      rl.on('line', function (line: string) {
+      rl.on('line', (line: string) => {
         let n = parseInt(line, 10);
         let count = 0;
         while (n > 0) {
@@ -19,6 +19,7 @@ export class No1094 {
           n = Math.floor(n / 2);
         }
         resolve(count.toString());
+        rl.close();
       });
     });
   }

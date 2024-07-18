@@ -9,9 +9,10 @@ export class No1357 {
     });
 
     return new Promise((resolve) => {
-      rl.on('line', function (line: string) {
+      rl.on('line', (line: string) => {
         const [x, y] = line.split(' ');
         resolve(solution(x, y).toString());
+        rl.close();
       });
     });
   }

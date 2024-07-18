@@ -9,7 +9,7 @@ export class No1001 {
     });
 
     return new Promise((resolve) => {
-      rl.on('line', function (line: string) {
+      rl.on('line', (line: string) => {
         const [a, b] = line.split(' ').map((el) => parseInt(el, 10));
         resolve((a - b).toString());
         rl.close();

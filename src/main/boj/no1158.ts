@@ -9,9 +9,10 @@ export class No1158 {
     });
 
     return new Promise((resolve) => {
-      rl.on('line', function (line: string) {
+      rl.on('line', (line: string) => {
         const [n, k] = line.split(' ').map((el: string) => parseInt(el, 10));
         resolve(`<${solution(n, k).join(', ')}>`);
+        rl.close();
       });
     });
   }

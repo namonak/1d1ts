@@ -9,18 +9,18 @@ export class No2775 {
     });
 
     return new Promise((resolve) => {
-      let n = 0;
+      let inputCount: number = 0;
       const numbers: number[] = [];
 
       rl.on('line', (line: string) => {
-        if (n === 0) {
-          n = parseInt(line, 10);
+        if (inputCount === 0) {
+          inputCount = parseInt(line, 10);
         } else {
           numbers.push(parseInt(line, 10));
         }
 
-        if (numbers.length === n * 2) {
-          resolve(solution(n, numbers).join('\n'));
+        if (numbers.length === inputCount * 2) {
+          resolve(solution(inputCount, numbers).join('\n'));
           rl.close();
         }
       });

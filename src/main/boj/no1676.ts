@@ -9,7 +9,7 @@ export class No1676 {
     });
 
     return new Promise((resolve) => {
-      rl.on('line', function (line: string) {
+      rl.on('line', (line: string) => {
         resolve(solution(parseInt(line, 10)).toString());
         rl.close();
       });
