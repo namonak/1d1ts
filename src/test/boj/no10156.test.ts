@@ -1,53 +1,33 @@
-import { solution } from '../../main/boj/no10156';
+import { No10156 } from '../../main/boj/no10156';
+import { Readable } from 'stream';
 
-type given = {
-  k: number;
-  n: number;
-  m: number;
+type TestCase = {
+  given: string;
+  expected: string;
 };
 
-type testCase = {
-  input: given;
-  output: number;
-};
-
-const testCases: testCase[] = [
+const testCases: TestCase[] = [
   {
-    input: {
-      k: 300,
-      n: 4,
-      m: 1000,
-    },
-    output: 200,
+    given: '300 4 1000',
+    expected: '200',
   },
   {
-    input: {
-      k: 250,
-      n: 2,
-      m: 140,
-    },
-    output: 360,
+    given: '250 2 140',
+    expected: '360',
   },
   {
-    input: {
-      k: 20,
-      n: 6,
-      m: 120,
-    },
-    output: 0,
+    given: '20 6 120',
+    expected: '0',
   },
   {
-    input: {
-      k: 20,
-      n: 10,
-      m: 320,
-    },
-    output: 0,
+    given: '20 10 320',
+    expected: '0',
   },
 ];
 
-test('과자 : https://www.acmicpc.net/problem/10156', () => {
-  testCases.forEach(({ input, output }) => {
-    expect(solution(input.k, input.n, input.m)).toBe(output);
-  });
+test('과자 : https://www.acmicpc.net/problem/10156', async () => {
+  for (const { given, expected } of testCases) {
+    const result = await new No10156().solve(Readable.from(given));
+    expect(result).toBe(expected);
+  }
 });
