@@ -1,18 +1,23 @@
 import * as readline from 'readline';
+import { Readable } from 'stream';
 
-if (process.env.NODE_ENV !== 'test') {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+export class No10998 {
+  async solve(input: Readable): Promise<string> {
+    return new Promise((resolve) => {
+      const rl = readline.createInterface({
+        input,
+        output: process.stdout,
+      });
 
-  rl.on('line', function (line: string) {
-    const input = line.split(' ').map((el: string) => parseInt(el));
-    console.log(solution(input[0], input[1]));
-    process.exit();
-  });
+      rl.on('line', (line: string) => {
+        const [a, b] = line.split(' ').map((el) => parseInt(el, 10));
+        resolve(solution(a, b).toString());
+        rl.close();
+      });
+    });
+  }
 }
 
-export function solution(a: number, b: number): number {
+function solution(a: number, b: number): number {
   return a * b;
 }
