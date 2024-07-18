@@ -30,6 +30,40 @@ const testCases: TestCase[] = [
 15`,
     expected: '13',
   },
+  {
+    given: `0`,
+    expected: '0',
+  },
+  {
+    given: `1
+5`,
+    expected: '5',
+  },
+  {
+    given: `2
+1
+2`,
+    expected: '2',
+  },
+  {
+    given: `5
+1
+2
+3
+4
+1000000`,
+    expected: '3',
+  },
+  {
+    given: `6
+1
+1
+1
+1
+1
+1000`,
+    expected: '1',
+  },
 ];
 
 test('solved.ac : https://www.acmicpc.net/problem/18110', async () => {
