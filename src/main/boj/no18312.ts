@@ -21,17 +21,22 @@ export class No18312 {
 function solution(n: number, k: number): number {
   let count = 0;
   const kStr = k.toString();
+  const maxSeconds = (n + 1) * 3600;
 
-  for (let h = 0; h <= n; h++) {
-    for (let m = 0; m < 60; m++) {
-      for (let s = 0; s < 60; s++) {
-        const time = `${h < 10 ? '0' : ''}${h}${m < 10 ? '0' : ''}${m}${s < 10 ? '0' : ''}${s}`;
-        if (time.includes(kStr)) {
-          count++;
-        }
-      }
+  for (let totalSeconds = 0; totalSeconds < maxSeconds; totalSeconds++) {
+    const h = Math.floor(totalSeconds / 3600);
+    const m = Math.floor((totalSeconds % 3600) / 60);
+    const s = totalSeconds % 60;
+    const time = `${padTime(h)}${padTime(m)}${padTime(s)}`;
+
+    if (time.includes(kStr)) {
+      count++;
     }
   }
 
   return count;
+}
+
+function padTime(unit: number): string {
+  return unit < 10 ? '0' + unit : unit.toString();
 }
