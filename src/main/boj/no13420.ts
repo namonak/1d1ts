@@ -30,10 +30,10 @@ export class No13420 {
 }
 
 type Operation = {
-  operand1: number;
-  operand2: number;
+  operand1: bigint;
+  operand2: bigint;
   operator: string;
-  result: number;
+  result: bigint;
 };
 
 function solution(input: string[]): string {
@@ -41,17 +41,17 @@ function solution(input: string[]): string {
     const [expression, result] = line.split(' = ');
     const [operand1, operator, operand2] = expression.split(' ');
     return {
-      operand1: parseInt(operand1, 10),
-      operand2: parseInt(operand2, 10),
+      operand1: BigInt(operand1),
+      operand2: BigInt(operand2),
       operator,
-      result: parseInt(result, 10),
+      result: BigInt(result),
     };
   });
 
   return operations
     .map((operation) => {
       const { operand1, operand2, operator, result } = operation;
-      let calculatedResult = 0;
+      let calculatedResult: bigint;
       switch (operator) {
         case '+':
           calculatedResult = operand1 + operand2;
@@ -65,6 +65,8 @@ function solution(input: string[]): string {
         case '/':
           calculatedResult = operand1 / operand2;
           break;
+        default:
+          throw new Error('Invalid operator');
       }
       return calculatedResult === result ? 'correct' : 'wrong answer';
     })
