@@ -35,20 +35,11 @@ function solution(numbers: number[]): number[] {
 }
 
 function gcd(a: number, b: number): number {
-  while (b !== 0) {
-    const temp = b;
-    b = a % b;
-    a = temp;
-  }
-  return a;
+  return b === 0 ? a : gcd(b, a % b);
 }
 
 function findGCD(numbers: number[]): number {
-  let result = numbers[0];
-  for (let i = 1; i < numbers.length; i++) {
-    result = gcd(result, numbers[i]);
-  }
-  return result;
+  return numbers.reduce((acc, num) => gcd(acc, num));
 }
 
 function getDivisors(n: number): number[] {
