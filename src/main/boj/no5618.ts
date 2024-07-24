@@ -39,10 +39,8 @@ function gcd(a: number, b: number): number {
 }
 
 function findGCD(numbers: number[]): number {
-  if (numbers.length === 0) {
-    throw new Error('Empty array of numbers');
-  }
-  return numbers.reduce((acc, num) => gcd(acc, num));
+  if (numbers.length === 0) return 0;
+  return numbers.reduce((acc, num) => gcd(acc, num), numbers[0]);
 }
 
 function getDivisors(n: number): number[] {
