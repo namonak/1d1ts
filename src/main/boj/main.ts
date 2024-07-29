@@ -1,10 +1,10 @@
 import * as fs from 'fs';
-import { No2755 } from '../../main/boj/no2755';
+import { No28113 } from '../../main/boj/no28113';
 
 async function main() {
   try {
     const input = fs.createReadStream('/dev/stdin');
-    const result = await new No2755().solve(input);
+    const result = await new No28113().solve(input);
     console.log(result);
     process.exit();
   } catch (err) {
